@@ -6,7 +6,7 @@ Client::Client(int _h, float _dist, float _cout) {
 	cout = _cout;
 }
 
-float Client::getCoutUnitaireStockage() {
+float Client::coutUnitaireStockage() {
 	return cout;
 }
 
