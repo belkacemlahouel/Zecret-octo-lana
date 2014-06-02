@@ -62,3 +62,15 @@ float Batch::sommeAvancesMin() {
     return sum;
 }
 
+void Batch::printBatch(){
+    int j;
+    cout << "Batch pour client " << getClient()->getNum() << " :\n";
+
+	for(j = 0; j < size(); ++j) {
+		cout << "\tProduit " << produits[j]->getNum() <<
+                ", Date due : " << produits[j]->getDateDue() << "\n";
+    }
+
+    cout << "\tDate due globale    : " << dateDueGlobale() << "\n";
+    cout << "\tSomme des avances   : " << sommeAvancesMin() << "\n\n";
+}
