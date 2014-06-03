@@ -34,59 +34,71 @@ Probleme::Probleme() {
 	// construction des batchs
 	buildBatchs();
 
+	// initialisation des évaluations
+	evalSol = 99999999;
+	evalBestSol = 99999999;
+
+	// initialisation des solutions
+	sol = batchs;
+	bestSol = batchs;
+
 	cout << "Initialisation instance de test OK\n";
 }
 
 // Batchs faits "bêtement" ici...
-// Dans l'ordre, car tri, du plus urgent au moins urgent
 void Probleme::buildBatchs() {
-	// Tri des produits... voir comment ça fonctionne avec la STL
-
-	vector<Produit*>::iterator it;
+	// Tri produits à faire
 	vector<Produit*> tmpProduits = produits;
 
 	while (tmpProduits.size() > 0) {
-		Batch tmp(tmpProduits[0]);
+		// cout << "Il reste " << tmpProduits.size() << " produits" << endl;
 
-		// Parcours de la liste en reprenant tous ceux du même client :
-		// Jusqu'à ce que ce batch soit plein					X
-		// 		Ou tmpProduits vide								X
-		// 		Ou qu'on soit arrivés à la fin de tmpProduits	X
+		Batch* tmp = new Batch(tmpProduits[0]);
+		tmpProduits.erase(tmpProduits.begin());
 
-		it = tmpProduits.begin();
-		tmpProduits.erase(it);
-		
-		while (it != tmpProduits.end() && tmp.size() < capa) {
-			if ((*it)->getClient()->getNum() == tmp.getClient()->getNum()) {
-				// Ajout de ce produit au batch temporaire
-				tmp.addProduit((*it));
+		vector<Produit*>::iterator it = tmpProduits.begin();
 
-				// Suppression de ce produit de tmpProduits
+		while (it != tmpProduits.end()) {
+			// cout << "Recherche de produits avec le même client" << endl;
+			if ((*it)->getClient()->getNum() == tmp->getClient()->getNum() &&
+														tmp->size() < capa) {
+				// cout << "Même client trouvé" << endl;
+				tmp->addProduit((*it));
 				tmpProduits.erase(it);
+			} else {
+				++it;
 			}
-			++it;
 		}
-		// Et on ajoute ce batch temporaire à batchs
-		batchs.push_back(&tmp);
+
+		batchs.push_back(tmp);
 	}
 }
 
 void Probleme::solutionHeuristique() {
 	// Nous n'avons plus qu'à dire que la solution heuristique
 	// est la liste des batchs ordonnés
-	sol = batchs;
-	evalSol = evaluationSol();
+	bestSol = batchs;
+
+	cout << "batchs.size() : " << batchs.size() << endl;
+	cout << "bestSol.size() : " << bestSol.size() << endl;
+
+	evalBestSol = evaluationSol();
 	dateCourante = 0;
+	cout << "Solution heuristique OK\n";
 }
 
 float Probleme::evaluationSol() {
-	// Evalue la solution courante sol
-	return 0.;
+	evalSol = 0;
+
+	for (int i = 0; i < sol.size(); ++i) {
+		evalSol += livraison(sol[i]);
+	}
+
+	return evalSol;
 }
 
 void Probleme::printBatchs() {
 	int i;
-
 	for(i = 0; i < batchs.size(); ++i) {
         batchs[i]->printBatch();
 	}
@@ -96,8 +108,8 @@ void Probleme::printBestSol(){
     int i;
     cout << "______________________________________________________\n";
     cout << "Meilleure solution trouvee :\n\t";
-    for (i = 0; i < bestSol.size()-1; ++i) {
-        cout << bestSol[i] << "--->";
+    for (i = 0; i < bestSol.size(); ++i) {
+        cout << "0--->" << bestSol[i]->getClient()->getNum() << "--->";
     }
     cout << "0\n\n";	// A la fin, on revient chez le fournisseur
     cout << "Evaluation de cette solution : " << evalBestSol << "\n";
@@ -120,12 +132,12 @@ float Probleme::annulerLivraison(Batch* b) {
 	return rep;
 }
 
-void Probleme::solve() {
+/* void Probleme::solve() {
 	solutionHeuristique();
 	solve(0, batchs);
 }
 
 void Probleme::solve(int iter, vector<Batch*> reste) {
-
-}
+	
+} */
 

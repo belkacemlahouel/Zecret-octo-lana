@@ -3,9 +3,9 @@
 int main(int argc, char** argv) {
 	cout << "----- Hello World! -----" << endl;
 	Probleme p;
-
-	// p->solutionHeuristique();
-	// p->printBestSol();
+	p.printBatchs();
+	p.solutionHeuristique();
+	p.printBestSol();
 
 	cout << "------ Bye World! ------" << endl;
 	return 0;
