@@ -1,0 +1,15 @@
+Challenge d'AG41 (Optimisation et Recherche opérationnelle).
+Université de Technologie de Belfort-Montbéliard (UTBM)
+2014
+
+Solution Exacte
+
+Belkacem LAHOUEL, Luc CADORET
+
+------------------------------------------------- TODO
+
+Ajouter les heuristiques pour cut
+Tester le parseur
+Ajouter les implémentations des tris pour les batchs...
+Ajouter les threads ?
+
