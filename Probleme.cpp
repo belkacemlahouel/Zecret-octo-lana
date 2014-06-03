@@ -35,8 +35,8 @@ Probleme::Probleme() {
 	buildBatchs();
 
 	// initialisation des évaluations
-	evalSol = 99999999;
-	evalBestSol = 99999999;
+	evalSol = 0;
+	evalBestSol = 0;
 
 	// initialisation des solutions
 	sol = batchs;
@@ -77,14 +77,17 @@ void Probleme::buildBatchs() {
 void Probleme::solutionHeuristique() {
 	// Nous n'avons plus qu'à dire que la solution heuristique
 	// est la liste des batchs ordonnés
-	bestSol = batchs;
+	sol = batchs;
 
-	cout << "batchs.size() : " << batchs.size() << endl;
-	cout << "bestSol.size() : " << bestSol.size() << endl;
+	// cout << "batchs.size() : " << batchs.size() << endl;
+	// cout << "bestSol.size() : " << bestSol.size() << endl;
 
 	evalBestSol = evaluationSol();
+	bestSol = sol;
+
 	dateCourante = 0;
-	cout << "Solution heuristique OK\n";
+	evalSol = 0;
+	// cout << "Solution heuristique OK\n";
 }
 
 float Probleme::evaluationSol() {
@@ -132,12 +135,43 @@ float Probleme::annulerLivraison(Batch* b) {
 	return rep;
 }
 
-/* void Probleme::solve() {
+void Probleme::solve() {
+	cout << "Lancement heuristique" << endl;
 	solutionHeuristique();
+	printBestSol();
+	cout << endl;
+
+	cout << "Lancement résolution" << endl;
 	solve(0, batchs);
 }
 
 void Probleme::solve(int iter, vector<Batch*> reste) {
-	
-} */
+	if (evalSol < evalBestSol) { // && encorePossible(...)
+		cout << "On peut continuer" << endl;
+		if (iter == batchs.size()) { // && reste.size() == 1
+			cout << "On peut terminer la solution, elle est bonne (?)" << endl;
+			// sol[iter] = reste[0];
+			// evalSol += livraison(reste[0]);
+			if (evalSol < evagitlBestSol) {
+				evalBestSol = evalSol;
+				bestSol = sol;
+			}
+			// evalSol -= annulerLivraison(reste[0]);
+		} else {
+			cout << "On ne peut pas encore construire, on doit avancer" << endl;
+			for (int i = 0; i < reste.size(); ++i) {
+				sol[iter] = reste[i];
+				evalSol += livraison(reste[i]);
+
+				vector<Batch*> reste2 = reste;
+				reste2.erase(reste.begin() + i);
+				solve(iter+1, reste2);
+
+				evalSol -= livraison(reste[i]);
+			}
+		}
+	} else {
+		cout << "Impasse, on s'arrête là" << endl;
+	}
+}
 

@@ -4,9 +4,10 @@ int main(int argc, char** argv) {
 	cout << "----- Hello World! -----" << endl;
 	Probleme p;
 	p.printBatchs();
-	p.solutionHeuristique();
+	// p.solutionHeuristique();
+	// p.printBestSol();
+	p.solve();
 	p.printBestSol();
-
 	cout << "------ Bye World! ------" << endl;
 	return 0;
 }

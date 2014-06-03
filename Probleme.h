@@ -25,7 +25,7 @@ class Probleme {
 		float dateCourante;				// Date courante lors du calcul
 
 		// --- Méthodes privées
-		// void solve(int iter, vector<Batch*> reste);
+		void solve(int iter, vector<Batch*> reste);
 
 	public:
 		Probleme(int capa, float eta, vector<Client*>, vector<Produit*>);
@@ -40,7 +40,7 @@ class Probleme {
         float evaluationSol();
 
         // bool encorePossible(vector<Batch*> reste);
-        // void solve();
+        void solve();
 
         float livraison(Batch*);		// Renvoient le coût de cette livraison
         float annulerLivraison(Batch*); // et avancent (ou reculent) la date
