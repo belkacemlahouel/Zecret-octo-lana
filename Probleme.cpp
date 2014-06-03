@@ -24,12 +24,12 @@ Probleme::Probleme() {
 	clients.push_back(new Client(3, 100, 9/2.));
 	clients.push_back(new Client(4, 100, 6));
 
-	// Création des produits
+	// Création des produits, dans le désordre exprès
+	produits.push_back(new Produit(5, 400, clients[2]));
+	produits.push_back(new Produit(3, 300, clients[2]));
 	produits.push_back(new Produit(1, 310, clients[0]));
 	produits.push_back(new Produit(2, 310, clients[0]));
-	produits.push_back(new Produit(3, 300, clients[2]));
 	produits.push_back(new Produit(4, 360, clients[2]));
-	produits.push_back(new Produit(5, 400, clients[2]));
 
 	// construction des batchs
 	buildBatchs();
@@ -82,22 +82,16 @@ void Probleme::solutionHeuristique() {
 	// cout << "batchs.size() : " << batchs.size() << endl;
 	// cout << "bestSol.size() : " << bestSol.size() << endl;
 
-	evalBestSol = evaluationSol();
+	evalBestSol = 0;
+	for (int i = 0; i < sol.size(); ++i) {
+		evalBestSol += livraison(sol[i]);
+	}
+
+	evalSol = 0;
 	bestSol = sol;
 
 	dateCourante = 0;
-	evalSol = 0;
 	// cout << "Solution heuristique OK\n";
-}
-
-float Probleme::evaluationSol() {
-	evalSol = 0;
-
-	for (int i = 0; i < sol.size(); ++i) {
-		evalSol += livraison(sol[i]);
-	}
-
-	return evalSol;
 }
 
 void Probleme::printBatchs() {
@@ -107,7 +101,7 @@ void Probleme::printBatchs() {
 	}
 }
 
-void Probleme::printBestSol(){
+void Probleme::printBestSol() {
     int i;
     cout << "______________________________________________________\n";
     cout << "Meilleure solution trouvee :\n\t";
@@ -116,6 +110,18 @@ void Probleme::printBestSol(){
     }
     cout << "0\n\n";	// A la fin, on revient chez le fournisseur
     cout << "Evaluation de cette solution : " << evalBestSol << "\n";
+    cout << "______________________________________________________\n";
+}
+
+void Probleme::printSol(int niveau) {
+	int i;
+    cout << "______________________________________________________\n";
+    cout << "Solution courante trouvee :\n\t";
+    for (i = 0; i <= niveau; ++i) {
+        cout << "0--->" << sol[i]->getClient()->getNum() << "--->";
+    }
+    cout << "0\n\n";	// A la fin, on revient chez le fournisseur
+    cout << "Evaluation de cette solution : " << evalSol << "\n";
     cout << "______________________________________________________\n";
 }
 
@@ -141,37 +147,70 @@ void Probleme::solve() {
 	printBestSol();
 	cout << endl;
 
+	dateCourante = 0;
 	cout << "Lancement résolution" << endl;
 	solve(0, batchs);
+
+	/*dateCourante = 0;
+	cout << "Est-ce que livraison/annulerLivraison fonctionnent ?" << endl;
+	cout << "Date avant : " << dateCourante << endl;
+	cout << "livraison : " << livraison(batchs[0]) << endl;
+	cout << "annulerLivraison : " << annulerLivraison(batchs[0]) << endl;
+	cout << "Date après : " << dateCourante << endl;
+	cout << "Est-ce qu'elles fonctionnent ? :: OUI" << endl;*/
 }
 
 void Probleme::solve(int iter, vector<Batch*> reste) {
-	if (evalSol < evalBestSol) { // && encorePossible(...)
-		cout << "On peut continuer" << endl;
-		if (iter == batchs.size()) { // && reste.size() == 1
-			cout << "On peut terminer la solution, elle est bonne (?)" << endl;
-			// sol[iter] = reste[0];
-			// evalSol += livraison(reste[0]);
-			if (evalSol < evagitlBestSol) {
+	cout << "reste.size() : " << reste.size() << endl;
+	if (evalSol < evalBestSol && encorePossible(reste)) {
+		if (iter == batchs.size()-1 && reste.size() == 1) {
+			sol[iter] = reste[0];
+			evalSol += livraison(reste[0]);
+
+			if (evalSol < evalBestSol) {
+				cout << "Une meilleure solution est trouvée" << endl;
 				evalBestSol = evalSol;
 				bestSol = sol;
 			}
-			// evalSol -= annulerLivraison(reste[0]);
+			evalSol -= annulerLivraison(reste[0]);
 		} else {
-			cout << "On ne peut pas encore construire, on doit avancer" << endl;
 			for (int i = 0; i < reste.size(); ++i) {
+				cout << "iter : " << iter << ", " << i << endl;
+
 				sol[iter] = reste[i];
+				printSol(iter);
+
 				evalSol += livraison(reste[i]);
 
 				vector<Batch*> reste2 = reste;
-				reste2.erase(reste.begin() + i);
+				reste2.erase(reste2.begin() + i);
 				solve(iter+1, reste2);
 
-				evalSol -= livraison(reste[i]);
+				evalSol -= annulerLivraison(reste[i]);
 			}
 		}
 	} else {
-		cout << "Impasse, on s'arrête là" << endl;
+		cout << "STOP : ";
+
+		if (evalSol >= evalBestSol) {
+			cout << "evalSol=" << evalSol << " >= evalBestSol=" << evalBestSol;
+			cout << endl;
+		}
+
+		if (!encorePossible(reste)) {
+			cout << "Ce chemin mène vers une impasse" << endl;
+		}
 	}
+}
+
+bool Probleme::encorePossible(vector<Batch*> reste) {
+	for (int i = 0; i < reste.size(); ++i) {
+		if (reste[i]->dateDueGlobale() < dateCourante) {
+						// dateCourante + reste[i]->getClient()->getDist()) {
+			
+			return false;
+		}
+	}
+	return true;
 }
 

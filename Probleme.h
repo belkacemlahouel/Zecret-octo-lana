@@ -35,11 +35,11 @@ class Probleme {
 		void buildBatchs();
 		void printBatchs();
 		void printBestSol();
+		void printSol(int niveau);
 
         void solutionHeuristique();
-        float evaluationSol();
 
-        // bool encorePossible(vector<Batch*> reste);
+        bool encorePossible(vector<Batch*> reste);
         void solve();
 
         float livraison(Batch*);		// Renvoient le coût de cette livraison
