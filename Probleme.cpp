@@ -32,7 +32,7 @@ Probleme::Probleme() {
 	produits.push_back(new Produit(5, 400, clients[2]));
 
 	// construction des batchs
-	buildBatchs();
+	// buildBatchs();
 }
 
 // Batchs faits "bêtement" ici...
@@ -52,8 +52,10 @@ void Probleme::buildBatchs() {
 		// 		Ou qu'on soit arrivés à la fin de tmpProduits	X
 
 		it = produits.begin();
+		tmpProduits.erase(it);
+		
 		while (it != produits.end() && tmp->size() < capa) {
-			if ((*it)->getClient() == tmp->getClient()) {
+			if ((*it)->getClient()->getNum() == tmp->getClient()->getNum()) {
 				// Ajout de ce produit au batch temporaire
 				tmp->addProduit((*it));
 

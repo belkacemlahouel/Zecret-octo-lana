@@ -2,7 +2,7 @@
 
 GXX = g++
 
-CCFLAGS = 
+CCFLAGS = -g
 # CCFLAGS = -Wall -Werror -ansi -pedantic -fPIC -Wextra -g -O3
 
 TARGET 		= challenge
@@ -12,6 +12,9 @@ HFILES		= Client.h Produit.h Batch.h Probleme.h
 exec: all
 	./$(TARGET)
 
+val: all
+	valgrind ./$(TARGET)
+
 all:
 	$(GXX) $(CCFLAGS) $(SRCFILES) -o $(TARGET)
 
@@ -19,4 +22,5 @@ clean:
 	rm -rf *.o *~
 
 clear: clean
-	rm -rf $(TARGET)
+	rm -rf $(TARGET)*
+
