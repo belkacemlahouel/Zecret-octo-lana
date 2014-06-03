@@ -74,3 +74,5 @@ void Batch::printBatch(){
     cout << "\tDate due globale    : " << dateDueGlobale() << "\n";
     cout << "\tSomme des avances   : " << sommeAvancesMin() << "\n\n";
 }
+
+

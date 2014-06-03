@@ -32,7 +32,9 @@ Probleme::Probleme() {
 	produits.push_back(new Produit(5, 400, clients[2]));
 
 	// construction des batchs
-	// buildBatchs();
+	buildBatchs();
+
+	cout << "Initialisation instance de test OK\n";
 }
 
 // Batchs faits "bêtement" ici...
@@ -44,20 +46,20 @@ void Probleme::buildBatchs() {
 	vector<Produit*> tmpProduits = produits;
 
 	while (tmpProduits.size() > 0) {
-		Batch* tmp = new Batch(tmpProduits[0]);
+		Batch tmp(tmpProduits[0]);
 
 		// Parcours de la liste en reprenant tous ceux du même client :
 		// Jusqu'à ce que ce batch soit plein					X
 		// 		Ou tmpProduits vide								X
 		// 		Ou qu'on soit arrivés à la fin de tmpProduits	X
 
-		it = produits.begin();
+		it = tmpProduits.begin();
 		tmpProduits.erase(it);
 		
-		while (it != produits.end() && tmp->size() < capa) {
-			if ((*it)->getClient()->getNum() == tmp->getClient()->getNum()) {
+		while (it != tmpProduits.end() && tmp.size() < capa) {
+			if ((*it)->getClient()->getNum() == tmp.getClient()->getNum()) {
 				// Ajout de ce produit au batch temporaire
-				tmp->addProduit((*it));
+				tmp.addProduit((*it));
 
 				// Suppression de ce produit de tmpProduits
 				tmpProduits.erase(it);
@@ -65,7 +67,7 @@ void Probleme::buildBatchs() {
 			++it;
 		}
 		// Et on ajoute ce batch temporaire à batchs
-		batchs.push_back(tmp);
+		batchs.push_back(&tmp);
 	}
 }
 
@@ -117,3 +119,13 @@ float Probleme::annulerLivraison(Batch* b) {
 	dateCourante -= b->getClient()->getDist();
 	return rep;
 }
+
+void Probleme::solve() {
+	solutionHeuristique();
+	solve(0, batchs);
+}
+
+void Probleme::solve(int iter, vector<Batch*> reste) {
+
+}
+

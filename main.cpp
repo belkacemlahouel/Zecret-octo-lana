@@ -2,12 +2,10 @@
 
 int main(int argc, char** argv) {
 	cout << "----- Hello World! -----" << endl;
-	// Probleme* p = new Probleme();
+	Probleme p;
 
 	// p->solutionHeuristique();
 	// p->printBestSol();
-
-	// delete(p);
 
 	cout << "------ Bye World! ------" << endl;
 	return 0;

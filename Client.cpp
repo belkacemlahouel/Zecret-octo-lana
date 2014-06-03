@@ -17,3 +17,4 @@ float Client::getDist() {
 int Client::getNum() {
 	return h;
 }
+

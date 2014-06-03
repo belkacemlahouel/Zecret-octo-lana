@@ -22,3 +22,4 @@ int Produit::getNum() {
 float Produit::coutStockage(int t) {
 	return (date-t) * client->coutUnitaireStockage();
 }
+
