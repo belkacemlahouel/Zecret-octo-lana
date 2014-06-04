@@ -19,8 +19,9 @@ class Produit {
 		int getNum();
 		float coutStockage(int _date);
 		void printProduit();
-		bool operator< (Produit);
-		bool operator() (Produit);
+		// bool operator< (Produit);
+		// bool operator() (Produit);
+		static bool compare(const Produit& p1, const Produit& p2);
 };
 
 #endif // __PRODUIT__

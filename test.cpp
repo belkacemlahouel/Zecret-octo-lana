@@ -6,14 +6,35 @@
 
 using namespace std;
 
-/*struct foncteurDateDue {
-	bool operator() (const Produit& p1, const Produit& p2) const {
+struct tmpfoncteur {
+	bool operator() (Produit& p1, Produit& p2) {
 		return p1.dateDue() < p2.dateDue();
 	}
 };
 
-bool compareProduits(Produit& p1, Produit& p2) {
+/*bool compareProduits(Produit& p1, Produit& p2) {
 	return p1.dateDue() < p2.dateDue();
+}*/
+
+bool operator< (Produit& p1, Produit& p2) {
+	cout << "Entrée opérateur <2" << endl;
+	if (p1.dateDue() < p2.dateDue())
+		return true;
+	return false;
+}
+
+/*bool operator() (Produit& p1, Produit& p2) {
+	cout << "Entrée opérateur ()2" << endl;
+	if (p1.dateDue() < p2.dateDue())
+		return true;
+	return false;
+}*/
+
+/*template<class T> class PointerComparator<T> :
+class binary_function<bool, T*, T*> {
+	bool operator()(T* a, T* b) {
+		return *a < *b;
+	}
 }*/
 
 int main(int argc, char** argv) {
@@ -35,14 +56,16 @@ int main(int argc, char** argv) {
 	Client* clt = new Client(1, 1, 1);
 	vector<Produit*> produits;
 	produits.push_back(new Produit(1, 310, clt));
+	produits.push_back(new Produit(5, 400, clt));
 	produits.push_back(new Produit(2, 310, clt));
 	produits.push_back(new Produit(3, 300, clt));
 	produits.push_back(new Produit(4, 360, clt));
-	produits.push_back(new Produit(5, 400, clt));
+
 	for (int i = 0; i < 5; ++i)
 		produits[i]->printProduit();
 	cout << endl;
-	sort(produits.begin(), produits.end());
+	// stable_sort(produits.begin(), produits.end(), foncteur);
+	sort(produits.begin(), produits.end(), Produit::compare);
 	for (int i = 0; i < 5; ++i)
 		produits[i]->printProduit();
 	cout << endl;
