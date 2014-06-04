@@ -26,11 +26,12 @@ class Probleme {
 
 		// --- Méthodes privées
 		void solve(int iter, vector<Batch*> reste);
+		template<class T> void viderVector(vector<T>);
 
 	public:
 		Probleme(int capa, float eta, vector<Client*>, vector<Produit*>);
 		Probleme();
-		~Probleme(){}
+		~Probleme();
 
 		void buildBatchs();
 		void printBatchs();

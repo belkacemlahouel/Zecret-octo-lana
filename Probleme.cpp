@@ -10,6 +10,9 @@ Probleme::Probleme(int _capa, float _eta, vector<Client*> _clients,
 
 	buildBatchs();
 
+	evalSol = 0;
+	evalBestSol = 0;
+
 	dateCourante = 0.0f;
 }
 
@@ -42,7 +45,22 @@ Probleme::Probleme() {
 	sol = batchs;
 	bestSol = batchs;
 
+	dateCourante = 0;
+
 	cout << "Initialisation instance de test OK\n";
+}
+
+Probleme::~Probleme() {
+	viderVector(clients);
+	viderVector(produits);
+	viderVector(batchs);
+}
+
+template<class T> void Probleme::viderVector(vector<T> vect) {
+	while (vect.size() > 0) {
+		delete vect[0];
+		vect.erase(vect.begin());
+	}
 }
 
 // Batchs faits "bêtement" ici...
