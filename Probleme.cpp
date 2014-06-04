@@ -28,11 +28,11 @@ Probleme::Probleme() {
 	clients.push_back(new Client(4, 100, 6));
 
 	// Création des produits, dans le désordre exprès
-	produits.push_back(new Produit(5, 400, clients[2]));
-	produits.push_back(new Produit(3, 300, clients[2]));
 	produits.push_back(new Produit(1, 310, clients[0]));
 	produits.push_back(new Produit(2, 310, clients[0]));
+	produits.push_back(new Produit(3, 300, clients[2]));
 	produits.push_back(new Produit(4, 360, clients[2]));
+	produits.push_back(new Produit(5, 400, clients[2]));
 
 	// construction des batchs
 	buildBatchs();
@@ -65,7 +65,13 @@ template<class T> void Probleme::viderVector(vector<T> vect) {
 
 // Batchs faits "bêtement" ici...
 void Probleme::buildBatchs() {
-	// Tri produits à faire
+	// Tri produits à faire sur les produits
+	cout << "Avant tri" << endl;
+	printProduits();
+	sort(produits.begin(), produits.end());
+	cout << "Après tri" << endl;
+	printProduits();
+
 	vector<Produit*> tmpProduits = produits;
 
 	while (tmpProduits.size() > 0) {
@@ -95,6 +101,7 @@ void Probleme::buildBatchs() {
 void Probleme::solutionHeuristique() {
 	// Nous n'avons plus qu'à dire que la solution heuristique
 	// est la liste des batchs ordonnés
+	sort(batchs.begin(), batchs.end());
 	sol = batchs;
 
 	// cout << "batchs.size() : " << batchs.size() << endl;
@@ -117,6 +124,14 @@ void Probleme::printBatchs() {
 	for(i = 0; i < batchs.size(); ++i) {
         batchs[i]->printBatch();
 	}
+}
+
+void Probleme::printProduits() {
+	cout << "Liste des produits à livrer :" << endl;
+	for (int i = 0; i < produits.size(); ++i) {
+		produits[i]->printProduit();
+	}
+	cout << endl;
 }
 
 void Probleme::printBestSol() {
@@ -179,7 +194,7 @@ void Probleme::solve() {
 }
 
 void Probleme::solve(int iter, vector<Batch*> reste) {
-	cout << "reste.size() : " << reste.size() << endl;
+	// cout << "reste.size() : " << reste.size() << endl;
 	if (evalSol < evalBestSol && encorePossible(reste)) {
 		if (iter == batchs.size()-1 && reste.size() == 1) {
 			sol[iter] = reste[0];
@@ -193,12 +208,12 @@ void Probleme::solve(int iter, vector<Batch*> reste) {
 			evalSol -= annulerLivraison(reste[0]);
 		} else {
 			for (int i = 0; i < reste.size(); ++i) {
-				cout << "iter : " << iter << ", " << i << endl;
+				// cout << "iter : " << iter << ", " << i << endl;
 
 				sol[iter] = reste[i];
-				printSol(iter);
-
 				evalSol += livraison(reste[i]);
+
+				printSol(iter);
 
 				vector<Batch*> reste2 = reste;
 				reste2.erase(reste2.begin() + i);
@@ -223,8 +238,8 @@ void Probleme::solve(int iter, vector<Batch*> reste) {
 
 bool Probleme::encorePossible(vector<Batch*> reste) {
 	for (int i = 0; i < reste.size(); ++i) {
-		if (reste[i]->dateDueGlobale() < dateCourante) {
-						// dateCourante + reste[i]->getClient()->getDist()) {
+		if (reste[i]->dateDueGlobale() < // dateCourante) {
+						dateCourante + reste[i]->getClient()->getDist()) {
 			
 			return false;
 		}

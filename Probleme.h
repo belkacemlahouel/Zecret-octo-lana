@@ -3,6 +3,7 @@
 
 #include "Batch.h"
 #include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ class Probleme {
 		// --- Méthodes privées
 		void solve(int iter, vector<Batch*> reste);
 		template<class T> void viderVector(vector<T>);
+        void solutionHeuristique();
 
 	public:
 		Probleme(int capa, float eta, vector<Client*>, vector<Produit*>);
@@ -35,10 +37,9 @@ class Probleme {
 
 		void buildBatchs();
 		void printBatchs();
+		void printProduits();
 		void printBestSol();
 		void printSol(int niveau);
-
-        void solutionHeuristique();
 
         bool encorePossible(vector<Batch*> reste);
         void solve();

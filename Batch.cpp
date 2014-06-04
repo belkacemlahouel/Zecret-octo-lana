@@ -22,12 +22,12 @@ void Batch::addProduit(Produit* p) {
 }
 
 float Batch::dateDueGlobale() {
-	int min = produits[0]->getDateDue();
+	int min = produits[0]->dateDue();
     int i;
 
     for(i = 1; i < size(); ++i) {
-        if(produits[i]->getDateDue() < min){
-            min = produits[i]->getDateDue();
+        if(produits[i]->dateDue() < min){
+            min = produits[i]->dateDue();
         }
     }
 
@@ -48,14 +48,14 @@ float Batch::coutStockage(int date) {
 float Batch::sommeAvancesMin() {
     int i;
     int sum = 0;
-    int min = produits[0]->getDateDue();
+    int min = produits[0]->dateDue();
 
     for (i = 1; i < size(); ++i) {
-        if (min < produits[i]->getDateDue())
-            sum += (produits[i]->getDateDue() - min);
+        if (min < produits[i]->dateDue())
+            sum += (produits[i]->dateDue() - min);
         else {
-            sum += (min - produits[i]->getDateDue()) * i;
-            min = produits[i]->getDateDue();
+            sum += (min - produits[i]->dateDue()) * i;
+            min = produits[i]->dateDue();
         }
     }
 
@@ -67,12 +67,16 @@ void Batch::printBatch(){
     cout << "Batch pour client " << getClient()->getNum() << " :\n";
 
 	for(j = 0; j < size(); ++j) {
-		cout << "\tProduit " << produits[j]->getNum() <<
-                ", Date due : " << produits[j]->getDateDue() << "\n";
+		produits[j]->printProduit();
     }
 
     cout << "\tDate due globale    : " << dateDueGlobale() << "\n";
     cout << "\tSomme des avances   : " << sommeAvancesMin() << "\n\n";
+}
+
+// Redéfinition de l'opérateur de comparaison <
+bool Batch::operator< (Batch& b) {
+	return (getClient()->getNum() < b.getClient()->getNum());
 }
 
 

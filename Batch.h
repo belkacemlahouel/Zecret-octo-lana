@@ -26,6 +26,7 @@ class Batch{
 
         float coutStockage(int date);
         float sommeAvancesMin();
+		bool operator< (Batch&);
 };
 
 #endif // __BATCH__
