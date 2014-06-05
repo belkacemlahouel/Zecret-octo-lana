@@ -4,22 +4,29 @@
 
 using namespace std;
 
+bool comparator(const Nono &n1, const Nono &n2) {
+	cout << "comparator &" << endl;
+	return n1.num < n2.num;
+}
+
+bool comparatorptr(Nono* n1, Nono* n2) {
+	cout << "comparator *" << endl;
+	return n1->num < n2->num;
+}
+
 int main(int argc, char** argv) {
 	cout << endl;
 
 	vector<Nono*> nonos;
-	nonos.push_back(new Nono(1));
-	nonos.push_back(new Nono(2));
-	nonos.push_back(new Nono(4));
-	nonos.push_back(new Nono(5));
-	nonos.push_back(new Nono(3));
+	for (int i = 0; i < 5; ++i)
+		nonos.push_back((new Nono(i+1)));
 
 	for (int i = 0; i < 5; ++i)
 		nonos[i]->print();
 	cout << endl;
 
 	// --------------------------------
-	sort(nonos.begin(), nonos.end());
+	sort(nonos.begin(), nonos.end(), comparatorptr);
 	// --------------------------------
 
 	for (int i = 0; i < 5; ++i)
@@ -31,7 +38,7 @@ int main(int argc, char** argv) {
 
 	// Test opérateur seul
 	nonos[4]->print();
-	if (*nonos[4] < *nonos[0]) {
+	if (nonos[4] < nonos[0]) {
 		cout << " < ";
 	} else {
 		cout << " > ";

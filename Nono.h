@@ -7,9 +7,11 @@ using namespace std;
 
 class Nono {
 	private:
-		int num;
+		// int num;
 
 	public:
+		int num;
+
 		Nono(int _num) : num(_num) {};
 
 		~Nono(){};
@@ -25,7 +27,6 @@ class Nono {
 		bool operator<(Nono& n) {
 			return getNum() < n.getNum();
 		};
-
 };
 
 #endif // __NONO__
