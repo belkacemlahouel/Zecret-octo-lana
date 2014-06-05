@@ -9,6 +9,7 @@ class Client {
 
 	public:
 		Client(int _h, float _dist, float _cout);
+		~Client(){};
 		float coutUnitaireStockage();
 		float getDist();
 		int getNum();

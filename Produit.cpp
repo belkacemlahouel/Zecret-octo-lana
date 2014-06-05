@@ -18,31 +18,11 @@ int Produit::getNum() {
 	return i;
 }
 
-// Comment implémenter les coûts si retard ...P?
+// Comment implémenter les coûts si retard ...?
 float Produit::coutStockage(int t) {
 	return (date-t) * client->coutUnitaireStockage();
 }
 
-// Surcharge de l'opérateur de comparaison <
-/*bool Produit::operator< (Produit p) {
-	cout << "Entrée opérateur <" << endl;
-	if (dateDue() < p.dateDue())
-		return true;
-	return false;
-}*/
-
-/*bool Produit::operator() (Produit p) {
-	cout << "Entrée opérateur ()" << endl;
-	if (dateDue() < p.dateDue())
-		return true;
-	return false;
-}*/
-
 void Produit::printProduit() {
 	cout << "\tProduit " << getNum() << ", Date due : " << dateDue() << "\n";
 }
-
-static bool Produit::compare(const Produit& p1, const Produit& p2) {
-	return p1.dateDue() < p2.dateDue();
-}
-

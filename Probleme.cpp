@@ -63,12 +63,23 @@ template<class T> void Probleme::viderVector(vector<T> vect) {
 	}
 }
 
+// Fonctions statiques de comparaison
+bool comparatorProduitPtrDateDue(Produit* p1, Produit* p2) {
+	// cout << "produitptr comparator" << endl;
+	return p1->dateDue() < p2->dateDue();
+}
+
+bool comparatorBatchPtrDateDue(Batch* b1, Batch* b2) {
+	// cout << "batchptr comparator" << endl;
+	return b1->dateDueGlobale() < b2->dateDueGlobale();
+}
+
 // Batchs faits "bêtement" ici...
 void Probleme::buildBatchs() {
 	// Tri produits à faire sur les produits
 	cout << "Avant tri" << endl;
 	printProduits();
-	sort(produits.begin(), produits.end());
+	sort(produits.begin(), produits.end(), comparatorProduitPtrDateDue);
 	cout << "Après tri" << endl;
 	printProduits();
 
@@ -101,7 +112,7 @@ void Probleme::buildBatchs() {
 void Probleme::solutionHeuristique() {
 	// Nous n'avons plus qu'à dire que la solution heuristique
 	// est la liste des batchs ordonnés
-	sort(batchs.begin(), batchs.end());
+	sort(batchs.begin(), batchs.end(), comparatorBatchPtrDateDue);
 	sol = batchs;
 
 	// cout << "batchs.size() : " << batchs.size() << endl;
@@ -176,7 +187,9 @@ float Probleme::annulerLivraison(Batch* b) {
 
 void Probleme::solve() {
 	cout << "Lancement heuristique" << endl;
+	// Appel des autres heuristiques et ne garder que la meilleure solution
 	solutionHeuristique();
+
 	printBestSol();
 	cout << endl;
 

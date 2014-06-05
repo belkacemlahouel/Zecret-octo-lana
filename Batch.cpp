@@ -74,9 +74,4 @@ void Batch::printBatch(){
     cout << "\tSomme des avances   : " << sommeAvancesMin() << "\n\n";
 }
 
-// Redéfinition de l'opérateur de comparaison <
-bool Batch::operator< (Batch& b) {
-	return (getClient()->getNum() < b.getClient()->getNum());
-}
-
 

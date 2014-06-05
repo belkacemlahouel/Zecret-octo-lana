@@ -3,7 +3,6 @@
 
 #include "Batch.h"
 #include <algorithm>
-#include <functional>
 
 using namespace std;
 
@@ -26,6 +25,9 @@ class Probleme {
 		float dateCourante;				// Date courante lors du calcul
 
 		// --- Méthodes privées
+		// bool comparatorProduitPtrDateDue(Produit*, Produit*);
+        // bool comparatorBatchPtrDateDue(Batch*, Batch*);
+
 		void solve(int iter, vector<Batch*> reste);
 		template<class T> void viderVector(vector<T>);
         void solutionHeuristique();
