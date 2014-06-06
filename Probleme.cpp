@@ -51,17 +51,18 @@ Probleme::Probleme() {
 }
 
 Probleme::~Probleme() {
-	viderVector(clients);
-	viderVector(produits);
-	viderVector(batchs);
+	Tools::viderVector(clients);
+	Tools::viderVector(produits);
+	Tools::viderVector(batchs);
 }
 
-template<class T> void Probleme::viderVector(vector<T> vect) {
-	while (vect.size() > 0) {
-		delete vect[0];
-		vect.erase(vect.begin());
-	}
-}
+// --> tools
+// template<class T> void Probleme::viderVector(vector<T> vect) {
+// 	while (vect.size() > 0) {
+// 		delete vect[0];
+// 		vect.erase(vect.begin());
+// 	}
+// }
 
 // Fonctions statiques de comparaison
 bool comparatorProduitPtrDateDue(Produit* p1, Produit* p2) {

@@ -1,6 +1,7 @@
 #ifndef __PROBLEME__
 #define __PROBLEME__
 
+#include "Tools.h"
 #include "Batch.h"
 #include <algorithm>
 
@@ -25,11 +26,8 @@ class Probleme {
 		float dateCourante;				// Date courante lors du calcul
 
 		// --- Méthodes privées
-		// bool comparatorProduitPtrDateDue(Produit*, Produit*);
-        // bool comparatorBatchPtrDateDue(Batch*, Batch*);
-
 		void solve(int iter, vector<Batch*> reste);
-		template<class T> void viderVector(vector<T>);
+		// template<class T> void viderVector(vector<T>); // --> tools
         void solutionHeuristique();
 
 	public:
