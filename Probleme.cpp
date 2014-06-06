@@ -51,8 +51,10 @@ Probleme::Probleme() {
 }
 
 Probleme::~Probleme() {
-	Tools::viderVector(clients);
-	Tools::viderVector(produits);
+	// Tools::viderVector(clients);
+	// Tools::viderVector(produits);
+	// Supprimés par le Parseur...
+
 	Tools::viderVector(batchs);
 }
 
@@ -64,23 +66,12 @@ Probleme::~Probleme() {
 // 	}
 // }
 
-// Fonctions statiques de comparaison
-bool comparatorProduitPtrDateDue(Produit* p1, Produit* p2) {
-	// cout << "produitptr comparator" << endl;
-	return p1->dateDue() < p2->dateDue();
-}
-
-bool comparatorBatchPtrDateDue(Batch* b1, Batch* b2) {
-	// cout << "batchptr comparator" << endl;
-	return b1->dateDueGlobale() < b2->dateDueGlobale();
-}
-
 // Batchs faits "bêtement" ici...
 void Probleme::buildBatchs() {
 	// Tri produits à faire sur les produits
 	cout << "Avant tri" << endl;
 	printProduits();
-	sort(produits.begin(), produits.end(), comparatorProduitPtrDateDue);
+	sort(produits.begin(), produits.end(), Tools::comparatorProduitPtrDateDue);
 	cout << "Après tri" << endl;
 	printProduits();
 
@@ -113,7 +104,7 @@ void Probleme::buildBatchs() {
 void Probleme::solutionHeuristique() {
 	// Nous n'avons plus qu'à dire que la solution heuristique
 	// est la liste des batchs ordonnés
-	sort(batchs.begin(), batchs.end(), comparatorBatchPtrDateDue);
+	sort(batchs.begin(), batchs.end(), Tools::comparatorBatchPtrDateDue);
 	sol = batchs;
 
 	// cout << "batchs.size() : " << batchs.size() << endl;
@@ -260,4 +251,8 @@ bool Probleme::encorePossible(vector<Batch*> reste) {
 	}
 	return true;
 }
+
+// ------
+
+
 

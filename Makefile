@@ -6,8 +6,8 @@ CCFLAGS = -g
 # CCFLAGS = -Wall -Werror -ansi -pedantic -fPIC -Wextra -g -O3
 
 TARGET 		= challenge
-SRCFILES 	= Client.cpp Produit.cpp Batch.cpp Probleme.cpp Parser.cpp Tools.cpp main.cpp
-HFILES		= Client.h Produit.h Batch.h Probleme.h Parser.h Tools.h
+SRCFILES 	= Client.cpp Produit.cpp Batch.cpp Probleme.cpp Parser.cpp main.cpp
+HFILES		= Tools.h Client.h Produit.h Batch.h Probleme.h Parser.h
 
 exec: all
 	./$(TARGET)

@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <list>
 #include "Probleme.h"
+#include "Tools.h"
 
 using namespace std;
 
@@ -26,11 +27,11 @@ class Parser {
 
         void parseFile(string name);
         void removeSpaces(string &str);
+		void printProduits();
 
 	public:
 		Parser(string filename);
-		~Parser(){} // TODO
-		void printProduits();
+		~Parser();
 
 		float getEta();
 		int getCapa();

@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 		Probleme p(r.getCapa(), r.getEta(),
 					r.getClients(), r.getProduits());
 
-		// ou on peut envoyer en paramètre le fichier
+		// ou : on peut envoyer en paramètre le fichier
 		// qu'un parseur dans Probleme lira
 
 		p.printBatchs();

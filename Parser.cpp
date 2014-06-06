@@ -4,6 +4,11 @@ Parser::Parser(string filename){
     parseFile(filename);
 }
 
+Parser::~Parser() {
+	Tools::viderVector(clients);
+	Tools::viderVector(produits);
+}
+
 void Parser::parseFile(string name){
 
 	ifstream stream;
@@ -96,7 +101,8 @@ void Parser::parseFile(string name){
                 }
                 cout<<"\n\n";
 
-                delete(buff);
+                free(buff);
+				// free(temp);
 
 			} else if(strcmp(desc.c_str(),"JOB_DUE_DATES") == 0){
                 data = line.substr(line.find(":"),line.find("\n"));
@@ -119,7 +125,8 @@ void Parser::parseFile(string name){
                 }
                 cout<<"\n\n";
 
-                delete(buff);
+                free(buff);
+				// free(temp);
 			}
 		}
 
@@ -207,3 +214,4 @@ vector<Client*> Parser::getClients() {
 vector<Produit*> Parser::getProduits() {
     return produits;
 }
+
