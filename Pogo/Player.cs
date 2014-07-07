@@ -6,4 +6,10 @@ public abstract class Player {
 	public PawnColor Color {
 		get {return color;}
 	}
+
+	public Player(PawnColor _color) {
+		color = _color;
+	}
+
+	public abstract void play();
 }
