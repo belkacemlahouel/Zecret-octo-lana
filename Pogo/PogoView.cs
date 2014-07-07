@@ -1,5 +1,11 @@
 using System;
 
-public class PogoView {
+public abstract class PogoView {
+	protected PogoModel model;
 
+	public PogoView() {
+		model = new PogoModel();
+	}
+
+	public abstract void update();
 }
