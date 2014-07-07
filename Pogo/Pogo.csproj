@@ -40,6 +40,10 @@
     <Compile Include="PogoModel.cs" />
     <Compile Include="PogoView.cs" />
     <Compile Include="PogoController.cs" />
+    <Compile Include="Board.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Case.cs" />
+    <Compile Include="Pawn.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

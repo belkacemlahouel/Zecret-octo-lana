@@ -1,18 +1,18 @@
 using System;
 
 public class Pawn {
-	private PawnValue value;
+	private PawnColor color;
 
-	public PawnValue Value {
-		get {return value;}
+	public PawnColor Color {
+		get {return color;}
 	}
 
-	public Pawn(PawnValue _value) {
-		value = _value;
+	public Pawn(PawnColor _color) {
+		color = _color;
 	}
 }
 
-public enum PawnValue {
+public enum PawnColor {
 	WHITE = 0,
 	BLACK = 1
 }
