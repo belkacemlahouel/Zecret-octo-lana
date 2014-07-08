@@ -1,17 +1,17 @@
 using System;
 
 public class Movement {
-	private Case dep;
+	private int dep;
 	private int i;
-	private Case arr;
+	private int arr;
 
-	public Movement(Case _dep, int _i, Case _arr) {
+	public Movement(int _dep, int _i, int _arr) {
 		dep = _dep;
 		i = _i;
 		arr = _arr;
 	}
 
-	public Case Dep {
+	public int Dep {
 		get {return dep;}
 	}
 
@@ -19,7 +19,7 @@ public class Movement {
 		get {return i;}
 	}
 
-	public Case Arr {
+	public int Arr {
 		get {return arr;}
 	}
 }
