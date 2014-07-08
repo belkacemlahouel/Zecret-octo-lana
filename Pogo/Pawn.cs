@@ -13,6 +13,7 @@ public class Pawn {
 }
 
 public enum PawnColor {
+	EMPTY = -1,
 	WHITE = 0,
-	BLACK = 1
+	BLACK = 1,
 }
