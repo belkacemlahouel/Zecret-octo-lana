@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class PogoModel {
 	private Board board;
@@ -68,7 +69,8 @@ public class PogoModel {
 
 	// Moving i-th first Pawns from Case d to Case a.
 	private void move(Case d, int i, Case a) {
-
+		Queue<Pawn> tmp = d.pop(i);
+		a.push(tmp);
 	}
 
 	private void run() {

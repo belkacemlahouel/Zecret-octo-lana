@@ -7,7 +7,7 @@ public class ConsoleView : PogoView {
 
 	// Printing every information about the current game
 	public override void update() {
-		Console.Write("Turn: ");
+		Console.Write("(TOP <--) Turn: ");
 		printTurn(model.Turn);
 		Console.WriteLine();
 

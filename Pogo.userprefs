@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Pogo/PogoGui.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Pogo/PogoView.cs">
     <Files>
-      <File FileName="Pogo/Main.cs" Line="5" Column="3" />
-      <File FileName="Pogo/PogoGui.cs" Line="3" Column="1" />
+      <File FileName="Pogo/PogoView.cs" Line="4" Column="11" />
+      <File FileName="Pogo/ConsoleView.cs" Line="11" Column="24" />
+      <File FileName="Pogo/PogoModel.cs" Line="21" Column="20" />
+      <File FileName="Pogo/Pawn.cs" Line="17" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

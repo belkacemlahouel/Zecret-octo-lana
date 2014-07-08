@@ -44,6 +44,9 @@
     <Compile Include="Player.cs" />
     <Compile Include="Case.cs" />
     <Compile Include="Pawn.cs" />
+    <Compile Include="HumanPlayer.cs" />
+    <Compile Include="ConsoleView.cs" />
+    <Compile Include="Pogo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
