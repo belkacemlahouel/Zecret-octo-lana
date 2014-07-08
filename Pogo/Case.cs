@@ -12,7 +12,7 @@ public class Case {
 		pawns = new Stack<Pawn>();
 	}
 
-	public void Push(Pawn p) {
+	public void push(Pawn p) {
 		pawns.Push(p);
 	}
 
@@ -33,6 +33,8 @@ public class Case {
 				rep.Enqueue(pawns.Pop());
 			}
 		}
+
+		return rep;
 	}
 
 	public void push(Queue<Pawn> top) {

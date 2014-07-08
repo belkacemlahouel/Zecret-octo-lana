@@ -17,11 +17,11 @@ public class Board {
 		}
 
 		for (int i = 0; i < 3; ++i) {
-			cases[0, i].Push(new Pawn(PawnColor.BLACK));
-			cases[0, i].Push(new Pawn(PawnColor.BLACK));
+			cases[0, i].push(new Pawn(PawnColor.BLACK));
+			cases[0, i].push(new Pawn(PawnColor.BLACK));
 
-			cases[2, i].Push(new Pawn(PawnColor.WHITE));
-			cases[2, i].Push(new Pawn(PawnColor.WHITE));
+			cases[2, i].push(new Pawn(PawnColor.WHITE));
+			cases[2, i].push(new Pawn(PawnColor.WHITE));
 		}
 	}
 }
