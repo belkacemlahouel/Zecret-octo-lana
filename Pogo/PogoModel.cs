@@ -50,6 +50,27 @@ public class PogoModel {
 		run();
 	}
 
+	private PawnColor winner() {
+		PawnColor tmp = PawnColor.EMPTY;
+
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 3; ++j) {
+				if (tmp != PawnColor.EMPTY && tmp != board.Cases[i, j].controller()) {
+						return PawnColor.EMPTY;
+				} else {
+					tmp = board.Cases[i, j].controller();
+				}
+			}
+		}
+
+		return tmp;
+	}
+
+	// Moving i-th first Pawns from Case d to Case a.
+	private void move(Case d, int i, Case a) {
+
+	}
+
 	private void run() {
 
 	}
