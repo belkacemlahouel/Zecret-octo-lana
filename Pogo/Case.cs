@@ -25,13 +25,19 @@ public class Case {
 
 	// Returns and removes all pawns until the i-th pawn.
 	// We use stack order style.
-	public Queue<Pawn> remove(int i) {
+	public Queue<Pawn> pop(int i) {
 		Queue<Pawn> rep = new Queue<Pawn>();
 
 		if (i < pawns.Count && i > 0) {
 			for (int j = 0; j < i; ++j) {
 				rep.Enqueue(pawns.Pop());
 			}
+		}
+	}
+
+	public void push(Queue<Pawn> top) {
+		while (top.Count > 0) {
+			pawns.Push(top.Dequeue());
 		}
 	}
 }
