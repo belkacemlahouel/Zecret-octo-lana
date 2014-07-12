@@ -12,9 +12,9 @@ public class Pawn {
     }
 
     public override string ToString() {
-        if (color == PawnColor.NULL) return "NULL Pawn";
-        else if (color == PawnColor.WHITE) return "WHITE Pawn";
-        else return "BLACK Pawn";
+        if (color == PawnColor.NULL) return "N";
+        else if (color == PawnColor.WHITE) return "W";
+        else return "B";
     }
 }
 

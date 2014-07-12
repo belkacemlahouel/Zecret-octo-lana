@@ -19,6 +19,9 @@ public class ZApplication {
         Console.WriteLine(ca.Push(pawnB));
         Console.WriteLine(ca);
 
+        PogoBoard boa = new PogoBoard();
+        Console.WriteLine(boa);
+
         Console.WriteLine("bye World!");
     }
 }

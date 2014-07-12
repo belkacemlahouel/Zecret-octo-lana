@@ -27,13 +27,19 @@ public class Case {
         }
     }
 
-    // Printing all Pawns in this Case, STACK order
+    // Printing all Pawns in this Case, stack order style (TOP -> BOT)
     public override string ToString() {
-        string rep = "Case containing:";
+        string rep = ""; // = "Case containing:";
 
         foreach (Pawn p in pawns) {
-            rep += " " + p.ToString();
+            rep += p;
         }
+
+        for (int i = pawns.Count; i < 12; ++i) {
+            rep += " ";
+        }
+
+        rep += " |";
 
         return rep;
     }
@@ -44,6 +50,43 @@ public class PogoBoard {
 
     public Case[,] Board {
         get { return board; }
+    }
+
+    public PogoBoard() {
+        board = new Case[3, 3];
+
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                board[i, j] = new Case();
+            }
+        }
+
+        for (int i = 0; i < 3; ++i) {
+            board[0, i].Push(new Pawn(PawnColor.BLACK));
+            board[0, i].Push(new Pawn(PawnColor.BLACK));
+
+            board[2, i].Push(new Pawn(PawnColor.WHITE));
+            board[2, i].Push(new Pawn(PawnColor.WHITE));
+        }
+    }
+
+    public void move() {
+
+    }
+
+    public override string ToString() {
+        string rep = "------------------------------------------\n";
+
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                rep += board[i, j] + " ";
+            }
+            rep += "\n";
+        }
+
+        rep += "------------------------------------------\n";
+
+        return rep;
     }
 }
 
