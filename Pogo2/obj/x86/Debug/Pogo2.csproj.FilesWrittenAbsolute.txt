@@ -1,0 +1,6 @@
+/Users/belka/Projects/Pogo2/Pogo2/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/belka/Projects/Pogo2/Pogo2/obj/x86/Debug/Pogo2.gtk-gui.gui.stetic
+/Users/belka/Projects/Pogo2/Pogo2/bin/Debug/Pogo2.exe.mdb
+/Users/belka/Projects/Pogo2/Pogo2/bin/Debug/Pogo2.exe
+/Users/belka/Projects/Pogo2/Pogo2/obj/x86/Debug/Pogo2.exe
+/Users/belka/Projects/Pogo2/Pogo2/obj/x86/Debug/Pogo2.exe.mdb
