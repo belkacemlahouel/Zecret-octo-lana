@@ -54,6 +54,13 @@ public class Case {
 
         return rep;
     }
+
+    public PawnColor Color {
+        get {
+            if (pawns.Count > 0) return pawns.Peek().Color;
+            else return PawnColor.NULL;
+        }
+    }
 }
 
 public class PogoBoard {
@@ -151,6 +158,10 @@ public class Move {
 
     public int End {
         get { return end; }
+    }
+
+    public override string ToString() {
+        return "Case#" + start + " -> " + "Case#" + end + " (" + index + ")\n";
     }
 }
 

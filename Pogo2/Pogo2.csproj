@@ -64,6 +64,7 @@
     <Compile Include="PogoBoard.cs" />
     <Compile Include="PogoPlayer.cs" />
     <Compile Include="ZPogoModel.cs" />
+    <Compile Include="ZPogoGui.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
