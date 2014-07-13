@@ -29,8 +29,7 @@ public class Case {
 
     public Stack<Pawn> Pop(int i) {
         Stack<Pawn> rep = new Stack<Pawn>();
-//        int borne = Math.Min(i, pawns.Count);
-        int borne = i;
+        int borne = Math.Min(i, pawns.Count);
 
         for (int j = 0; j < borne; ++j) {
             rep.Push(pawns.Pop());
@@ -82,7 +81,7 @@ public class PogoBoard {
         }
     }
 
-    public void move(Case c1, int i, Case c2) {
+    private void move(Case c1, int i, Case c2) {
         c2.Push(c1.Pop(i));
     }
 
@@ -90,8 +89,29 @@ public class PogoBoard {
     // 1 2 3 | 0,0  0,1  0,2
     // 4 5 6 | 1,0  1,1  1,2
     // 7 8 9 | 2,0  2,1  2,2
-    public void move(int i1, int i, int i2) {
-        move(board[(i1-1)/3, (i1-1)%3], i, board[(i2-1)/3, (i2-1)%3]);
+    public bool move(int case1, int i, int case2) {
+        if (i >= 1) {
+            int i1 = (case1 - 1) / 3;
+            int j1 = (case1 - 1) % 3;
+            int i2 = (case2 - 1) / 3;
+            int j2 = (case2 - 1) % 3;
+
+            if (distance(i1, j1, i2, j2) == i) {
+                move(board[i1, j1], i, board[i2, j2]);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool move(Move mov) {
+        return move(mov.Start, mov.Index, mov.End);
+    }
+
+    // Manhattan distance between two cases on the board.
+    private int distance(int i1, int j1, int i2, int j2) {
+        return Math.Abs(j2-j1) + Math.Abs(i2-i1);
     }
 
     public override string ToString() {

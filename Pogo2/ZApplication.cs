@@ -21,12 +21,16 @@ public class ZApplication {
 
         PogoBoard boa = new PogoBoard();
         Console.WriteLine(boa);
-        boa.move(1, 2, 5);
         boa.move(9, 2, 5);
+        Console.WriteLine(boa);
+        boa.move(1, 2, 5);
+        Console.WriteLine(boa.move(9, 2, 5));
         Console.WriteLine(boa);
         boa.move(5, 3, 1);
         Console.WriteLine(boa);
         boa.move(2, 1, 1);
+        Console.WriteLine(boa);
+        boa.move(1, 3, 9);
         Console.WriteLine(boa);
         boa.move(1, 3, 9);
         Console.WriteLine(boa);
