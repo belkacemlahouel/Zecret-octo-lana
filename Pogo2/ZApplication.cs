@@ -31,7 +31,6 @@ public class ZApplication {
         boa.move(1, 3, 9);
         Console.WriteLine(boa);
 
-
         Console.WriteLine("Bye World!");
     }
 }

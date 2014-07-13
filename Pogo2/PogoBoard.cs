@@ -110,3 +110,27 @@ public class PogoBoard {
     }
 }
 
+public class Move {
+    private int start;
+    private int index;
+    private int end;
+
+    public Move(int _start, int _index, int _end) {
+        start = _start;
+        index = _index;
+        end = _end;
+    }
+
+    public int Start {
+        get { return start; }
+    }
+
+    public int Index {
+        get { return index; }
+    }
+
+    public int End {
+        get { return end; }
+    }
+}
+
