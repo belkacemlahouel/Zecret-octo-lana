@@ -8,6 +8,8 @@ public class ZPogoModel {
     private PawnColor lastPlayerColor;
     private int moves;
     private Move lastMove;
+    private Move nextMove;
+    private ZPogoController controller;
 
     public PogoBoard Board {
         get { return board; }
@@ -33,14 +35,24 @@ public class ZPogoModel {
         get { return lastMove; }
     }
 
+    public Move NextMove {
+        get { return nextMove; }
+    }
+
     public ZPogoModel() {
         board = new PogoBoard();
-        white = new PogoPlayer();
-        black = new PogoPlayer();
         moves = 0;
         lastPlayerColor = PawnColor.NULL;
 
+        controller = new ZPogoController();
+
+        white = new PogoPlayer(this);
+        black = new PogoPlayer(this);
         gui = new ZPogoGui(this);
+    }
+
+    public Move getNextMove() {
+        return controller.nextMove();
     }
 
     private PawnColor winner() {

@@ -113,7 +113,9 @@ public class PogoBoard {
     }
 
     public bool move(Move mov) {
-        return move(mov.Start, mov.Index, mov.End);
+        if (mov != null)
+            return move(mov.Start, mov.Index, mov.End);
+        return false;
     }
 
     // Manhattan distance between two cases on the board.
